@@ -30,7 +30,7 @@ print(f"K value: {k}")
 # les mêmes données sensibles
 
 # on peut choisir un l entre 3 et 5 courant et on vérifie !
-l = 5
+l = 3
 is_l_verification_valid = anonymizer.verify_l_anonymization(
     df, "sensor_location", ["blood_pressure", "heart_rate"], l
 )
@@ -40,6 +40,9 @@ print(f"L-diversity (L={l}) : {is_l_verification_valid}")
 # avec cette approche on a bien la bonne vérification mais notre algorithme ne fait
 # le rapprochement entre un patient qui a 71 et 12 de bool_pressure, il faudrait qu'on
 # un des clés moyen : .., haut : .. pour rendre plus résistant
+
+# En associant les données à des valeurs proches on obtient l=3 fonctionne
+# mais pas l=4 ni l=5 !
 
 
 df.to_csv(NEW_FILE_PATH)
