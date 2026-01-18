@@ -60,18 +60,19 @@ class Anonymizer:
 
         return df_copy
 
+    def prepare_sensible_data(
+        self, df: DataFrame, blood_pressure_key: str, heart_rate_key: str
+    ) -> DataFrame:
+        df_copy = self._prepare_grouping_blood_pressure(df, blood_pressure_key)
+        df_copy = self._prepare_grouping_heart_rate(df_copy, heart_rate_key)
+
+        return df_copy
+
     def verify_l_anonymization(
         self, df: DataFrame, group_key: str, sensible_data_keys: list, l: int = 3
     ) -> bool:
 
-        # attention le programme ne marchera pas si on inverse dans la liste
-        # sensible_data_keys le blood_pressure et heart_rate !
-        # dans ce mini programme c'est pas un grand enjeu
-
-        df_copy = self._prepare_grouping_blood_pressure(df, sensible_data_keys[0])
-        df_copy = self._prepare_grouping_heart_rate(df_copy, sensible_data_keys[1])
-
-        groups = df_copy.groupby(group_key)
+        groups = df.groupby(group_key)
 
         for _, group_df in groups:
             # pour tous les groupes on vérifie qu'il y ait au moins

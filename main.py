@@ -30,9 +30,12 @@ print(f"K value: {k}")
 # les mêmes données sensibles
 
 # on peut choisir un l entre 3 et 5 courant et on vérifie !
-l = 3
+l = 5
+
+prepared_df = anonymizer.prepare_sensible_data(df, "blood_pressure", "heart_rate")
+
 is_l_verification_valid = anonymizer.verify_l_anonymization(
-    df, "sensor_location", ["blood_pressure", "heart_rate"], l
+    prepared_df, "sensor_location", ["blood_pressure", "heart_rate"], l
 )
 
 print(f"L-diversity (L={l}) : {is_l_verification_valid}")
